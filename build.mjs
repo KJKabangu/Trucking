@@ -147,6 +147,12 @@ const ICONS = {
   users:
     '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.5 3.5 0 0 1 0 5.6M17.5 14.4A6.5 6.5 0 0 1 21.5 20"/>',
   chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  instagram:
+    '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1"/>',
+  facebook:
+    '<path d="M14 21v-8h2.7l.4-3.1H14V7.9c0-.9.25-1.5 1.55-1.5H17.2V3.6c-.29-.04-1.28-.13-2.43-.13-2.4 0-4.05 1.47-4.05 4.16V9.9H8v3.1h2.72V21"/>',
+  linkedin:
+    '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 10.5V17M7.5 7.5v.01M11.5 17v-4a2.5 2.5 0 0 1 5 0v4"/>',
 };
 
 const icon = (name, cls = '') => {
@@ -527,15 +533,33 @@ function buildBlocks(cfg, computed, currentPath) {
 </section>`;
   }
 
+  // Icon-only links, so each needs an accessible name of its own. "Instagram"
+  // alone would be ambiguous in a screen reader's link list, hence the company
+  // name in the label.
   B.socialLinks = Object.entries(c.social)
     .filter(([, url]) => Boolean(url))
-    .map(
-      ([name, url]) =>
-        `<li><a href="${attr(url)}" rel="me noopener" target="_blank">${esc(
-          name[0].toUpperCase() + name.slice(1)
-        )}</a></li>`
-    )
+    .map(([name, url]) => {
+      const label = `${c.company.shortName} on ${name[0].toUpperCase() + name.slice(1)}`;
+      return `<li><a href="${attr(url)}" rel="me noopener" target="_blank" aria-label="${attr(
+        label
+      )}" title="${attr(label)}">${icon(name)}</a></li>`;
+    })
     .join('\n');
+
+  // Heading and list travel together, so neither shows up orphaned when no
+  // social accounts are configured.
+  B.footerSocial = B.socialLinks
+    ? `<h3 class="footer__heading footer__heading--sub">Follow us</h3>
+        <ul class="footer__social">${B.socialLinks}</ul>`
+    : '';
+
+  B.contactSocial = B.socialLinks
+    ? `<div class="aside-card aside-card--light">
+          <h3>Follow us</h3>
+          <p>Loads, equipment, and the occasional look at what we are hauling.</p>
+          <ul class="social-row">${B.socialLinks}</ul>
+        </div>`
+    : '';
 
   // Publishing coverage limits the company does not actually carry would be a
   // serious problem, and the placeholders here look like real dollar figures.

@@ -137,10 +137,13 @@ export default {
     hoursNote: 'Loads in transit are covered around the clock. Call anytime.',
   },
 
+  // Order here is the order the icons render. These also feed the `sameAs`
+  // field in the structured data, which is how Google ties the website and the
+  // social profiles together as one business.
   social: {
-    facebook: null,
+    instagram: 'https://www.instagram.com/gfktransport/',
+    facebook: 'https://www.facebook.com/pages/GFK%20Transport/926819034058958/',
     linkedin: null,
-    instagram: null,
   },
 
   // ---------------------------------------------------------------------------
