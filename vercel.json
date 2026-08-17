@@ -47,6 +47,12 @@
     { "source": "/request-a-quote", "destination": "/quote/", "permanent": true },
     { "source": "/insurance", "destination": "/safety/", "permanent": true },
     { "source": "/compliance", "destination": "/safety/", "permanent": true },
-    { "source": "/faqs", "destination": "/faq/", "permanent": true }
+    { "source": "/faqs", "destination": "/faq/", "permanent": true },
+    { "source": "/available-trucks", "destination": "/capacity/", "permanent": true },
+    { "source": "/trucks", "destination": "/capacity/", "permanent": true },
+    { "source": "/availability", "destination": "/capacity/", "permanent": true },
+    { "source": "/carrier-packet", "destination": "/brokers/", "permanent": true },
+    { "source": "/setup", "destination": "/brokers/", "permanent": true },
+    { "source": "/shippers", "destination": "/brokers/", "permanent": true }
   ]
 }

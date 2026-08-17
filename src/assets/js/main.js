@@ -80,10 +80,43 @@
      generate two quote requests.
      ------------------------------------------------------------------ */
 
+  /**
+   * A short reference both sides can quote on the phone. Deliberately not a
+   * booking number: nothing is booked until an owner confirms it. It exists so
+   * "I sent a request this morning" becomes "GFK-260817-4KP2".
+   */
+  function makeReference() {
+    const d = new Date();
+    const stamp =
+      String(d.getFullYear()).slice(2) +
+      String(d.getMonth() + 1).padStart(2, '0') +
+      String(d.getDate()).padStart(2, '0');
+    // Omits I, O, 0 and 1, which get misheard and mistyped over a phone.
+    const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let tail = '';
+    const random = new Uint32Array(4);
+    (window.crypto || window.msCrypto).getRandomValues(random);
+    for (let i = 0; i < 4; i++) tail += alphabet[random[i] % alphabet.length];
+    return 'GFK-' + stamp + '-' + tail;
+  }
+
   document.querySelectorAll('form[data-guard]').forEach((form) => {
     form.addEventListener('submit', () => {
       // Let native validation reject first.
       if (!form.checkValidity()) return;
+
+      // Attach a reference and stash it so the thank-you page can show it.
+      const field = form.querySelector('input[name="reference"]');
+      if (field) {
+        const ref = makeReference();
+        field.value = ref;
+        try {
+          window.sessionStorage.setItem('gfk-reference', ref);
+        } catch (err) {
+          // Private browsing can refuse sessionStorage. The reference still
+          // goes out with the form, it just will not be echoed back on screen.
+        }
+      }
 
       const button = form.querySelector('button[type="submit"]');
       if (!button) return;
@@ -101,6 +134,43 @@
       }, 12000);
     });
   });
+
+  /* ------------------------------------------------------------------
+     Thank-you page: echo the reference and tailor the copy to whichever
+     form was actually submitted.
+     ------------------------------------------------------------------ */
+
+  const refSlot = document.getElementById('reference-slot');
+  if (refSlot) {
+    let ref = null;
+    try {
+      ref = window.sessionStorage.getItem('gfk-reference');
+      window.sessionStorage.removeItem('gfk-reference');
+    } catch (err) {
+      /* storage unavailable, fall through to hiding the block */
+    }
+    if (ref) {
+      const code = refSlot.querySelector('[data-reference]');
+      if (code) code.textContent = ref;
+      refSlot.hidden = false;
+    }
+  }
+
+  const typePanels = document.querySelectorAll('[data-thanks-type]');
+  if (typePanels.length) {
+    const type = params.get('type') || 'contact';
+    let matched = false;
+    typePanels.forEach((panel) => {
+      const isMatch = panel.dataset.thanksType === type;
+      panel.hidden = !isMatch;
+      if (isMatch) matched = true;
+    });
+    // Unknown or missing type falls back to the general panel.
+    if (!matched) {
+      const fallback = document.querySelector('[data-thanks-type="contact"]');
+      if (fallback) fallback.hidden = false;
+    }
+  }
 
   /* ------------------------------------------------------------------
      Pickup date fields cannot be in the past

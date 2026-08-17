@@ -1,0 +1,212 @@
+<!--meta {
+  "title": "Broker and Shipper Setup | Carrier Packet | GFK Transport LLC",
+  "description": "Everything needed to set up GFK Transport LLC as a carrier. USDOT 2367819, MC 812027, insurance, W-9, references, and a setup form. Fort Wayne, Indiana.",
+  "path": "/brokers/",
+  "breadcrumb": "Brokers and shippers",
+  "priority": 0.8,
+  "changefreq": "monthly"
+} -->
+
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Brokers and shippers</li>
+      </ol>
+    </nav>
+    <h1>Set us up as a carrier</h1>
+    <p>
+      Everything your compliance team asks for, on one page, so onboarding us
+      takes minutes instead of a day of emails. If something you need is not
+      here, call and it goes out the same business day.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Copy and paste</p>
+      <h2>Carrier details</h2>
+      <p class="lead">
+        These are the fields on nearly every carrier setup form. Take them
+        straight from here so nothing gets transposed.
+      </p>
+    </div>
+    {{{ html.carrierDetails }}}
+    <p style="margin-top: 1.5rem">
+      <a class="hero__verify" style="color: var(--amber-700)" href="{{ authority.saferUrl }}" target="_blank" rel="noopener">
+        Verify all of this against our FMCSA record <span aria-hidden="true">&nearr;</span>
+      </a>
+    </p>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="form-shell">
+      <div>
+        <p class="eyebrow">Paperwork</p>
+        <h2>Documents</h2>
+        <p class="lead" style="margin-top: 1rem; margin-bottom: 1.5rem">
+          A certificate of insurance naming your company as certificate holder
+          is issued before the first load and renews automatically each policy
+          term.
+        </p>
+        <ul class="spec-list">
+          {{{ html.brokerDocs }}}
+        </ul>
+
+        <h3 style="margin: 2.5rem 0 1rem">References</h3>
+        {{{ html.brokerReferences }}}
+      </div>
+
+      <aside>
+        <div class="aside-card">
+          <h3>Compliance contact</h3>
+          <p>Packets, certificates, and setup forms. Same business day.</p>
+          <ul class="contact-list">
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>
+              <span><a href="mailto:{{ $.emailSafety }}?subject=Carrier%20setup">{{ $.emailSafety }}</a></span>
+            </li>
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
+              <span><a href="{{ $.phoneHref }}">{{ contact.phone }}</a></span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="aside-card aside-card--light">
+          <h3>Full safety program</h3>
+          <p>
+            Driver qualification, hours of service, maintenance, cargo
+            securement, and claims handling are documented in detail.
+          </p>
+          <div class="btn-row" style="margin-top: 1.25rem">
+            <a class="btn btn--dark" href="/safety/">Safety and compliance</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Setup request</p>
+      <h2>Send us your packet</h2>
+      <p class="lead">
+        Tell us who you are and what you need from us. If you have a carrier
+        packet or setup form of your own, say so and we will complete and return
+        it.
+      </p>
+    </div>
+
+    <div class="form-shell">
+      {{{ html.formBroker }}}
+
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">Your company</legend>
+          <div class="field-grid">
+            <div class="field">
+              <label for="b-company">Company name <span class="req" aria-hidden="true">*</span></label>
+              <input id="b-company" name="company" type="text" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="b-type">You are a <span class="req" aria-hidden="true">*</span></label>
+              <select id="b-type" name="company_type" required>
+                <option value="">Select</option>
+                <option value="Broker">Freight broker</option>
+                <option value="Shipper">Shipper</option>
+                <option value="3PL">3PL</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="b-name">Your name <span class="req" aria-hidden="true">*</span></label>
+              <input id="b-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="b-title">Title or department</label>
+              <input id="b-title" name="title" type="text" autocomplete="organization-title">
+            </div>
+            <div class="field">
+              <label for="b-email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input id="b-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="b-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+              <input id="b-phone" name="phone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="field field--full">
+              <label for="b-mc">
+                Your MC or DOT number
+                <span class="hint">Brokers only, so we can verify your authority and bond</span>
+              </label>
+              <input id="b-mc" name="broker_mc" type="text">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">What you need</legend>
+          <div class="field-grid">
+            <div class="field field--full">
+              <label for="b-needs">Send me</label>
+              <select id="b-needs" name="needs">
+                <option value="Full carrier packet">The full carrier packet</option>
+                <option value="COI only">Certificate of insurance only</option>
+                <option value="W-9 only">W-9 only</option>
+                <option value="Complete our form">Complete and return our setup form</option>
+                <option value="Other">Something else, see notes</option>
+              </select>
+            </div>
+            <div class="field field--full">
+              <label for="b-lanes">
+                Lanes you would use us on
+                <span class="hint">Helps us tell you honestly whether we can cover them</span>
+              </label>
+              <input id="b-lanes" name="lanes" type="text" placeholder="Fort Wayne, IN to Columbus, OH, weekly">
+            </div>
+            <div class="field field--full">
+              <label for="b-notes">Notes</label>
+              <textarea id="b-notes" name="notes" placeholder="Certificate holder wording, portal you use, insurance minimums, anything else."></textarea>
+            </div>
+            <div class="field field--full">
+              <label class="checkbox">
+                <input type="checkbox" name="consent" value="yes" required>
+                <span>
+                  I agree that {{ company.shortName }} may contact me about this
+                  request. <span class="req" aria-hidden="true">*</span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form__footer">
+          <button class="btn btn--primary btn--lg" type="submit">Request setup</button>
+          <p class="form__note">
+            Requests sent on a business day are answered the same day. See our
+            <a href="/privacy/">privacy policy</a>.
+          </p>
+        </div>
+      </form>
+
+      <aside>
+        <div class="aside-card aside-card--light">
+          <h3>What you get back</h3>
+          <ol class="prose" style="padding-left: 1.35rem; list-style: decimal; margin-top: 0.75rem">
+            <li>Signed W-9 and a certificate of insurance naming you as holder.</li>
+            <li>Our authority letter and a copy of the FMCSA snapshot.</li>
+            <li>Your setup form completed and returned, if you have one.</li>
+            <li>A direct number for whichever owner will be handling your freight.</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

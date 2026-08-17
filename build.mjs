@@ -109,6 +109,27 @@ function resolveOptionalImage(src) {
   return null;
 }
 
+/** "2026-08-19" -> "Wed, Aug 19". Parsed as local, not UTC, to avoid an off-by-one day. */
+function formatDate(ymd) {
+  if (!ymd) return '';
+  const [y, m, d] = String(ymd).split('-').map(Number);
+  if (!y || !m || !d) return String(ymd);
+  return new Date(y, m - 1, d).toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+
+/** Whole days between a YYYY-MM-DD date and today. Negative means the future. */
+function daysSince(ymd) {
+  const [y, m, d] = String(ymd).split('-').map(Number);
+  if (!y || !m || !d) return Infinity;
+  const then = new Date(y, m - 1, d);
+  const now = new Date();
+  return Math.floor((new Date(now.getFullYear(), now.getMonth(), now.getDate()) - then) / 86400000);
+}
+
 function formatTime(hhmm) {
   if (!hhmm) return null;
   const [h, m] = hhmm.split(':').map(Number);
@@ -300,6 +321,7 @@ function buildBlocks(cfg, computed, currentPath) {
     quote: `Quote request from the ${c.company.shortName} website`,
     driver: `Driver application from the ${c.company.shortName} website`,
     contact: `Message from the ${c.company.shortName} website`,
+    broker: `Carrier setup request from the ${c.company.shortName} website`,
   };
 
   const formOpen = (name, type) => {
@@ -311,7 +333,12 @@ function buildBlocks(cfg, computed, currentPath) {
     // reload rather than a fake success page, and the build shouts about it.
     const action = netlify ? thankYou : configured ? c.forms.endpoint : '';
 
-    const hidden = [`<input type="hidden" name="form-name" value="${attr(name)}">`];
+    const hidden = [
+      `<input type="hidden" name="form-name" value="${attr(name)}">`,
+      // Filled in by main.js on submit. Empty if JavaScript is off, which is
+      // fine: the reference is a convenience, never a requirement.
+      `<input type="hidden" name="reference" value="">`,
+    ];
     if (!netlify && configured) {
       hidden.push(`<input type="hidden" name="_subject" value="${attr(SUBJECTS[type])}">`);
       // Formspree reads _next; Web3Forms reads redirect. Sending both is
@@ -339,7 +366,115 @@ function buildBlocks(cfg, computed, currentPath) {
   B.formQuote = formOpen('quote', 'quote');
   B.formDriver = formOpen('driver-application', 'driver');
   B.formContact = formOpen('contact', 'contact');
+  B.formBroker = formOpen('broker-setup', 'broker');
   B.formsConfigured = c.forms.provider === 'netlify' || filled('forms.endpoint');
+
+  // -------------------------------------------------------------------------
+  // Available capacity
+  // -------------------------------------------------------------------------
+
+  const capacityLive = filled('capacity.trucks') && !computed.capacityStale;
+
+  B.capacityTable = capacityLive
+    ? `
+<div class="table-scroll">
+  <table class="capacity-table">
+    <caption class="visually-hidden">Trucks currently available, updated ${esc(
+      computed.capacityUpdatedLabel
+    )}</caption>
+    <thead>
+      <tr>
+        <th scope="col">Equipment</th>
+        <th scope="col">Available</th>
+        <th scope="col">Currently near</th>
+        <th scope="col">Looking for</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${c.capacity.trucks
+        .map(
+          (t) => `<tr>
+        <th scope="row">${esc(t.equipment)}</th>
+        <td>${esc(formatDate(t.available))}</td>
+        <td>${esc(t.origin)}</td>
+        <td>${esc(t.destination)}${
+          t.notes ? `<span class="capacity-note">${esc(t.notes)}</span>` : ''
+        }</td>
+      </tr>`
+        )
+        .join('\n      ')}
+    </tbody>
+  </table>
+</div>
+<p class="capacity-updated">Updated ${esc(computed.capacityUpdatedLabel)}. Availability moves fast, so call to confirm before you build a plan around it.</p>`
+    : '';
+
+  // When the list is empty or gone stale, the page still has a job to do. It
+  // says what we run and asks for the call, rather than showing dates that may
+  // no longer be true.
+  B.capacityFallback = capacityLive
+    ? ''
+    : `
+<div class="callout callout--wide">
+  <p>
+    <strong>Call or text ${esc(c.contact.phone)} for today's availability.</strong><br>
+    Our board changes through the day, so rather than publish times that may
+    already be wrong, we would rather you reach a person who knows where every
+    truck is right now.
+  </p>
+</div>`;
+
+  B.capacityEquipment = c.services
+    .filter((s) => ['dry-van', 'box-truck'].includes(s.slug))
+    .map(
+      (s) => `
+<div class="card">
+  <span class="card__icon">${icon(s.icon)}</span>
+  <h3 class="card__title">${esc(s.name)}</h3>
+  <p class="card__body">${esc(s.short)}</p>
+</div>`
+    )
+    .join('\n');
+
+  // -------------------------------------------------------------------------
+  // Broker onboarding
+  // -------------------------------------------------------------------------
+
+  // A block a broker can copy straight into their carrier setup form. Saves
+  // them retyping and saves you correcting a transposed MC number later.
+  B.carrierDetails = `
+<dl class="detail-grid">
+  <div><dt>Legal name</dt><dd>${esc(c.company.legalName)}</dd></div>
+  <div><dt>USDOT</dt><dd>${esc(c.authority.usdot)}</dd></div>
+  <div><dt>MC docket</dt><dd>${esc(c.authority.mc)}</dd></div>
+  <div><dt>Address</dt><dd>${esc(computed.addressLine)}</dd></div>
+  <div><dt>Phone</dt><dd><a href="${attr(computed.phoneHref)}">${esc(c.contact.phone)}</a></dd></div>
+  <div><dt>Email</dt><dd><a href="mailto:${attr(c.contact.email)}">${esc(c.contact.email)}</a></dd></div>
+  <div><dt>Equipment</dt><dd>${esc(c.services.map((s) => s.name).slice(0, 2).join(', '))}</dd></div>
+  ${c.brokers.paymentTerms ? `<div><dt>Payment terms</dt><dd>${esc(c.brokers.paymentTerms)}</dd></div>` : ''}
+  ${c.brokers.factoring ? `<div><dt>Factoring</dt><dd>${esc(c.brokers.factoring)}</dd></div>` : ''}
+</dl>`;
+
+  const docLink = (url, label, fallbackSubject) =>
+    url
+      ? `<li>${icon('doc', 'icon--sm')}<span><a href="${attr(url)}" download>${esc(label)}</a></span></li>`
+      : `<li>${icon('doc', 'icon--sm')}<span>${esc(label)}, <a href="mailto:${attr(
+          computed.emailSafety
+        )}?subject=${encodeURIComponent(fallbackSubject)}">request by email</a></span></li>`;
+
+  B.brokerDocs = [
+    docLink(c.authority.w9Url, 'W-9', 'W-9 request'),
+    docLink(c.authority.insuranceCertUrl, 'Certificate of insurance', 'Certificate of insurance request'),
+    docLink(c.brokers.packetUrl, 'Full carrier packet', 'Carrier packet request'),
+  ].join('\n');
+
+  B.brokerReferences = filled('brokers.references')
+    ? `<ul class="spec-list">${c.brokers.references
+        .map((r) => `<li>${icon('check', 'icon--sm')}<span>${esc(r)}</span></li>`)
+        .join('\n')}</ul>`
+    : `<p>References are available on request. Call ${esc(
+        c.contact.phone
+      )} and we will put you in touch with shippers we move freight for regularly.</p>`;
 
   B.serviceOptions = c.services
     .map((s) => `<option value="${attr(s.name)}">${esc(s.name)}</option>`)
@@ -733,6 +868,12 @@ async function build() {
     benefitsFilled: cfg.drivers.benefits.filter(
       (_, i) => !todos.includes(`drivers.benefits.${i}.body`)
     ),
+    // Capacity listings expire on their own. Publishing a truck that left two
+    // weeks ago is worse than publishing nothing, and nobody remembers to clear
+    // the page manually.
+    capacityStale: daysSince(cfg.capacity.updated) > cfg.capacity.staleAfterDays,
+    capacityUpdatedLabel: formatDate(cfg.capacity.updated),
+    capacityAgeDays: daysSince(cfg.capacity.updated),
     year: currentYear,
     years: currentYear - cfg.company.foundedYear,
     siteUrl: String(cfg.site.url).replace(/\/+$/, ''),

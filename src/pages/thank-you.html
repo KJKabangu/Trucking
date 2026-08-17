@@ -1,6 +1,6 @@
 <!--meta {
-  "title": "Thank You | GFK Transport LLC",
-  "description": "We received your message. GFK Transport LLC will be in touch shortly.",
+  "title": "Request Received | GFK Transport LLC",
+  "description": "We received your request. GFK Transport LLC will be in touch shortly.",
   "path": "/thank-you/",
   "breadcrumb": "Thank you",
   "noindex": true
@@ -11,20 +11,71 @@
     <div class="status-page__icon">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 12.5 5 5 10-11"/></svg>
     </div>
+
     <h1>Got it. Thank you.</h1>
-    <p>
-      Your message reached us and we will get back to you shortly. Weekday
-      quote requests are answered the same business day. Anything sent
-      overnight or on a weekend gets a reply the next business morning.
-    </p>
+
+    <div class="reference" id="reference-slot" hidden>
+      <p class="reference__label">Your reference</p>
+      <p class="reference__code" data-reference>&nbsp;</p>
+      <p class="reference__note">
+        Quote this if you call before we reach you. It is a reference for the
+        conversation, not a confirmed booking.
+      </p>
+    </div>
+
+    <div data-thanks-type="quote" hidden>
+      <p>
+        Your request is with us. On a business day you will have an all-in rate
+        back the same day, with any accessorials named up front so the invoice
+        matches the number you approve.
+      </p>
+      <p>
+        <strong>Nothing is booked yet.</strong> A load is confirmed when we send
+        you a rate confirmation and you sign it, not when this page loads.
+      </p>
+    </div>
+
+    <div data-thanks-type="driver" hidden>
+      <p>
+        Your application is in, and an owner reads every one of them personally.
+        You will hear back either way, usually within a couple of business days.
+      </p>
+      <p>
+        This was an interest form, not the DOT employment application. If we move
+        forward, the full application, MVR authorization, and background release
+        come next.
+      </p>
+    </div>
+
+    <div data-thanks-type="broker" hidden>
+      <p>
+        We will send your packet the same business day. That means our signed
+        W-9, a certificate of insurance naming your company as certificate
+        holder, our authority letter, and your own setup form completed and
+        returned if you have one.
+      </p>
+      <p>
+        You will also get a direct number for whichever owner will be handling
+        your freight.
+      </p>
+    </div>
+
+    <div data-thanks-type="contact" hidden>
+      <p>
+        Your message reached us and we will get back to you shortly. Anything
+        sent overnight or on a weekend gets a reply the next business morning.
+      </p>
+    </div>
+
     <p>
       If this is urgent, or there is freight already in transit, call
-      <a href="{{ $.phoneHref }}"><strong>{{ contact.phone }}</strong></a> instead
-      of waiting on email.
+      <a href="{{ $.phoneHref }}"><strong>{{ contact.phone }}</strong></a> rather
+      than waiting on email. Loads on the road are covered around the clock.
     </p>
+
     <div class="btn-row">
       <a class="btn btn--primary btn--lg" href="/">Back to home</a>
-      <a class="btn btn--ghost btn--lg" href="/services/">See our services</a>
+      <a class="btn btn--ghost btn--lg" href="/capacity/">See available trucks</a>
     </div>
   </div>
 </section>

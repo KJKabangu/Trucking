@@ -42,15 +42,15 @@ export default {
     // The founding story, rendered beside the owner photo on the About page.
     // Each string is a paragraph.
     ownersStory: [
-      'Cibi Muhindo and Kabangu Biayi came to the United States from the ' +
-        'Democratic Republic of the Congo in the 1990s. Like most people who ' +
-        'make that trip, they arrived looking for opportunity, then spent years ' +
-        'doing the unglamorous work of building it.',
-      'In 2013 they founded GFK Transport on their own authority, with their ' +
-        'own equipment. They still own it and they still run it. No holding ' +
-        'company, no parent brand, no investor who bought the name and kept it ' +
-        'on the door.',
-      'They are also married, which is worth saying plainly because it explains ' +
+      'We came to the United States from the Democratic Republic of the Congo ' +
+        'in 1999. Like most people who make that trip, we arrived looking for ' +
+        'opportunity, then spent years doing the unglamorous work of building ' +
+        'it.',
+      'In 2013 we founded GFK Transport on our own authority, with our own ' +
+        'equipment. We still own it and we still run it. No holding company, ' +
+        'no parent brand, no investor who bought the name and kept it on the ' +
+        'door.',
+      'We are also married, which is worth saying plainly because it explains ' +
         'how this company operates. A family business does not get to separate ' +
         'its reputation from its family. When we tell you a load will be there ' +
         'Tuesday, the people making that promise are the people whose name is ' +
@@ -352,6 +352,61 @@ export default {
   ],
 
   // ---------------------------------------------------------------------------
+  // Available capacity. This is the mirror image of posting a truck on a load
+  // board: instead of you hunting freight, a broker or shipper searching for a
+  // truck in your area finds you and calls direct, with no broker margin in
+  // between.
+  //
+  // It only works if it is current. A page advertising a truck that left three
+  // weeks ago costs you credibility with exactly the people you want to
+  // impress, so `updated` is checked at build time. Once it is older than
+  // staleAfterDays the page stops showing specific trucks and dates and asks
+  // people to call for today's availability instead.
+  //
+  // Update this whenever your board changes. It is two lines of editing.
+  // ---------------------------------------------------------------------------
+  capacity: {
+    updated: '2026-08-17', // YYYY-MM-DD, the day you last checked this list
+    staleAfterDays: 7,
+    trucks: TODO([
+      {
+        equipment: 'Dry Van, 53 ft',
+        available: '2026-08-19',
+        origin: 'Fort Wayne, IN',
+        destination: 'Open, Midwest preferred',
+        notes: 'Can load same day within 150 miles',
+      },
+      {
+        equipment: 'Box Truck',
+        available: '2026-08-18',
+        origin: 'Fort Wayne, IN',
+        destination: 'Open',
+        notes: 'No dock needed at delivery',
+      },
+    ]),
+  },
+
+  // ---------------------------------------------------------------------------
+  // Broker onboarding. Brokers vet before they tender, and the carrier that
+  // answers the packet request fastest usually gets the load. Everything a
+  // broker needs to set you up lives on /brokers/.
+  // ---------------------------------------------------------------------------
+  brokers: {
+    // Upload PDFs to static/docs/ and point at them, for example
+    // '/docs/gfk-w9.pdf'. Anything left null renders a request-by-email link
+    // instead of a dead download.
+    packetUrl: null,
+    // Shippers or brokers who will vouch for you. Nothing moves a new broker
+    // faster than two names they can call.
+    references: TODO([
+      'Company name, contact name, phone number',
+      'Add two or three you have cleared with them first',
+    ]),
+    factoring: null, // e.g. 'Factoring company name, notice of assignment on file'
+    paymentTerms: null, // e.g. 'Net 30, quick pay available'
+  },
+
+  // ---------------------------------------------------------------------------
   // Forms. The quote form is the single most valuable thing on this site, so
   // where it posts is not a detail.
   //
@@ -377,10 +432,10 @@ export default {
   // ---------------------------------------------------------------------------
   nav: [
     { label: 'Services', href: '/services/' },
-    { label: 'Safety', href: '/safety/' },
+    { label: 'Available trucks', href: '/capacity/' },
+    { label: 'Brokers', href: '/brokers/' },
     { label: 'About', href: '/about/' },
     { label: 'Drivers', href: '/drivers/' },
-    { label: 'FAQ', href: '/faq/' },
     { label: 'Contact', href: '/contact/' },
   ],
 

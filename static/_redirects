@@ -15,3 +15,9 @@
 /insurance         /safety/              301
 /compliance        /safety/              301
 /faqs              /faq/                 301
+/available-trucks  /capacity/            301
+/trucks            /capacity/            301
+/availability      /capacity/            301
+/carrier-packet    /brokers/             301
+/setup             /brokers/             301
+/shippers          /brokers/             301
