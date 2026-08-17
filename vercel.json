@@ -1,0 +1,52 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run images && npm run build",
+  "outputDirectory": "dist",
+  "trailingSlash": true,
+  "cleanUrls": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self' https://formspree.io https://api.web3forms.com https://usebasin.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }]
+    },
+    {
+      "source": "/(.*).(png|jpg|jpeg|webp|svg|ico|woff2)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+    }
+  ],
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/quote.html", "destination": "/quote/", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact/", "permanent": true },
+    { "source": "/about.html", "destination": "/about/", "permanent": true },
+    { "source": "/careers", "destination": "/drivers/", "permanent": true },
+    { "source": "/careers/:path*", "destination": "/drivers/", "permanent": true },
+    { "source": "/jobs", "destination": "/drivers/", "permanent": true },
+    { "source": "/drivers/apply", "destination": "/drivers/#apply", "permanent": true },
+    { "source": "/get-a-quote", "destination": "/quote/", "permanent": true },
+    { "source": "/request-a-quote", "destination": "/quote/", "permanent": true },
+    { "source": "/insurance", "destination": "/safety/", "permanent": true },
+    { "source": "/compliance", "destination": "/safety/", "permanent": true },
+    { "source": "/faqs", "destination": "/faq/", "permanent": true }
+  ]
+}

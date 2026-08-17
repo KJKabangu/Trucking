@@ -137,9 +137,26 @@ Three forms ship with the site:
 | Driver application | `/drivers/` | `driver-application` |
 | General contact | `/contact/` | `contact` |
 
-They are configured for **Netlify Forms**, which needs no backend code. Each
-form carries `data-netlify="true"`, a hidden `form-name` input, and a honeypot
-field that catches unsophisticated spam bots.
+Where they post is controlled by `site.config.js` → `forms`. Set this to match
+where you actually deploy, because a form pointed at the wrong provider fails
+silently: the visitor sees a success page and you never get the lead.
+
+```js
+forms: {
+  provider: 'netlify',   // Netlify Forms. No endpoint, no backend, Netlify hosting only.
+  // or
+  provider: 'external',  // Anywhere else. Posts to the endpoint below.
+  endpoint: 'https://formspree.io/f/YOUR_FORM_ID',
+}
+```
+
+`npm run build` prints a loud warning when forms are not configured.
+
+Every form carries a hidden `form-name` input so you can tell which one fired,
+plus a honeypot field that catches unsophisticated spam bots. In `external`
+mode it also sends `_subject`, and both `_next` and `redirect` pointing at
+`/thank-you/`, which covers Formspree and Web3Forms respectively. Each provider
+ignores the field it does not recognize.
 
 **After the first deploy to Netlify, do this:**
 
@@ -178,10 +195,26 @@ still shows.
 4. Add your domain under **Domain management**. Netlify provisions HTTPS
    automatically.
 
+### Vercel
+
+`vercel.json` carries everything: build command, `outputDirectory: "dist"`,
+security headers, and redirects. Import the repo and deploy, no dashboard
+configuration needed.
+
+Two things to know, because Vercel ignores every Netlify-specific file in this
+repo:
+
+- **`netlify.toml`, `static/_headers`, and `static/_redirects` do nothing here.**
+  Their contents are duplicated in `vercel.json`. If you change a security
+  header or a redirect, change it in **both** files or the two hosts will drift.
+- **Netlify Forms does not exist on Vercel.** Set `forms.provider` to
+  `'external'` and give it an endpoint, or all three forms are dead.
+
 ### Cloudflare Pages
 
 Build command `npm run images && npm run build`, output directory `dist`.
-`_headers` and `_redirects` are read natively.
+`_headers` and `_redirects` are read natively. Set `forms.provider` to
+`'external'`.
 
 ### Any other static host
 

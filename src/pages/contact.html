@@ -27,19 +27,7 @@
 <section class="section">
   <div class="container">
     <div class="form-shell">
-      <form
-        class="form"
-        name="contact"
-        method="POST"
-        action="/thank-you/?type=contact"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        data-guard
-      >
-        <input type="hidden" name="form-name" value="contact">
-        <p class="hp" aria-hidden="true">
-          <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
-        </p>
+      {{{ html.formContact }}}
 
         <fieldset class="fieldset">
           <legend class="fieldset__legend">Send us a message</legend>

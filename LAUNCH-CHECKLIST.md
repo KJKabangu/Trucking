@@ -55,6 +55,36 @@ add it.
 
 These appear on the page as obvious placeholders. Do not launch with them.
 
+### Forms, if you are deploying on Vercel
+
+This is the highest-priority item on the page. **Netlify Forms does not work on
+Vercel.** Without an endpoint, all three forms post nowhere and every quote
+request, driver application, and contact message is lost silently.
+
+| Config key | What to put there |
+| --- | --- |
+| `forms.provider` | `'external'` on Vercel or Cloudflare. `'netlify'` only if you host on Netlify |
+| `forms.endpoint` | Your form service URL |
+
+Pick a form service. Any of these takes about five minutes and needs no code:
+
+- **Formspree**, formspree.io. 50 submissions/month free. Endpoint looks like
+  `https://formspree.io/f/abcd1234`
+- **Web3Forms**, web3forms.com. 250/month free, no account required
+- **Basin**, usebasin.com. 100/month free
+
+All three are already allowed by the `form-action` directive in the Content
+Security Policy in `vercel.json`. If you pick a different service, add its
+domain there or the browser will block the submission.
+
+**Worth considering instead:** Netlify hosts this site just as well, and its
+built-in Forms product means no third-party service, no monthly submission cap
+to worry about at your volume, and submissions land in a dashboard with email
+notifications. `netlify.toml` is already in the repo. If you switch, set
+`forms.provider` to `'netlify'` and delete nothing else.
+
+---
+
 ### Contact details
 
 All filled in:

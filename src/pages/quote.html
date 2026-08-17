@@ -27,19 +27,7 @@
 <section class="section">
   <div class="container">
     <div class="form-shell">
-      <form
-        class="form"
-        name="quote"
-        method="POST"
-        action="/thank-you/?type=quote"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        data-guard
-      >
-        <input type="hidden" name="form-name" value="quote">
-        <p class="hp" aria-hidden="true">
-          <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
-        </p>
+      {{{ html.formQuote }}}
 
         <fieldset class="fieldset">
           <legend class="fieldset__legend">Your details</legend>

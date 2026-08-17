@@ -101,19 +101,7 @@
       </p>
     </div>
 
-    <form
-      class="form"
-      name="driver-application"
-      method="POST"
-      action="/thank-you/?type=driver"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
-      data-guard
-    >
-      <input type="hidden" name="form-name" value="driver-application">
-      <p class="hp" aria-hidden="true">
-        <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
-      </p>
+      {{{ html.formDriver }}}
 
       <fieldset class="fieldset">
         <legend class="fieldset__legend">About you</legend>

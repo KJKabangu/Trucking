@@ -287,6 +287,54 @@ function buildBlocks(cfg, computed, currentPath) {
     )
     .join('\n');
 
+  // Form opening tags, built from config so the same markup works on Netlify,
+  // Vercel, or anywhere else. Each carries its hidden bookkeeping fields and
+  // the honeypot.
+  const SUBJECTS = {
+    quote: `Quote request from the ${c.company.shortName} website`,
+    driver: `Driver application from the ${c.company.shortName} website`,
+    contact: `Message from the ${c.company.shortName} website`,
+  };
+
+  const formOpen = (name, type) => {
+    const netlify = c.forms.provider === 'netlify';
+    const configured = netlify || filled('forms.endpoint');
+    const thankYou = `/thank-you/?type=${type}`;
+
+    // With nothing configured, post back to the page itself. A visitor gets a
+    // reload rather than a fake success page, and the build shouts about it.
+    const action = netlify ? thankYou : configured ? c.forms.endpoint : '';
+
+    const hidden = [`<input type="hidden" name="form-name" value="${attr(name)}">`];
+    if (!netlify && configured) {
+      hidden.push(`<input type="hidden" name="_subject" value="${attr(SUBJECTS[type])}">`);
+      // Formspree reads _next; Web3Forms reads redirect. Sending both is
+      // harmless, since each provider ignores the field it does not know.
+      if (filled('site.url')) {
+        const url = `${computed.siteUrl}${thankYou}`;
+        hidden.push(`<input type="hidden" name="_next" value="${attr(url)}">`);
+        hidden.push(`<input type="hidden" name="redirect" value="${attr(url)}">`);
+      }
+    }
+
+    return `<form
+        class="form"
+        name="${attr(name)}"
+        method="POST"
+        action="${attr(action)}"${netlify ? '\n        data-netlify="true"\n        netlify-honeypot="bot-field"' : ''}
+        data-guard
+      >
+        ${hidden.join('\n        ')}
+        <p class="hp" aria-hidden="true">
+          <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>`;
+  };
+
+  B.formQuote = formOpen('quote', 'quote');
+  B.formDriver = formOpen('driver-application', 'driver');
+  B.formContact = formOpen('contact', 'contact');
+  B.formsConfigured = c.forms.provider === 'netlify' || filled('forms.endpoint');
+
   B.serviceOptions = c.services
     .map((s) => `<option value="${attr(s.name)}">${esc(s.name)}</option>`)
     .join('\n');
@@ -791,6 +839,17 @@ ${indexable
     for (const l of new Set(leaks)) console.log(`    ! ${l}`);
     console.log('\n  That section should hide itself until its config is filled in.');
     process.exitCode = 1;
+  }
+
+  // Forms deserve their own warning rather than being one line in a list of
+  // twenty. An unconfigured form loses leads silently: the visitor believes
+  // they contacted you, and nothing ever arrives.
+  const formsLive = cfg.forms.provider === 'netlify' || !todos.includes('forms.endpoint');
+  if (!formsLive) {
+    console.log('\n  WARNING: forms are not configured. Submissions will go nowhere.');
+    console.log(`    provider is "${cfg.forms.provider}" but forms.endpoint is still a placeholder.`);
+    console.log('    Deploying on Netlify?  set forms.provider to "netlify".');
+    console.log('    Anywhere else?         set forms.endpoint to your form service URL.');
   }
 
   if (todos.length) {

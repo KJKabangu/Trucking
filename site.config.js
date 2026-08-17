@@ -349,6 +349,27 @@ export default {
   ],
 
   // ---------------------------------------------------------------------------
+  // Forms. The quote form is the single most valuable thing on this site, so
+  // where it posts is not a detail.
+  //
+  //   provider: 'netlify'  Netlify Forms. No endpoint needed, no backend code,
+  //                        submissions appear in the Netlify dashboard. Only
+  //                        works when the site is hosted on Netlify.
+  //
+  //   provider: 'external' Posts to `endpoint`. Use this on Vercel, Cloudflare
+  //                        Pages, or anywhere that is not Netlify. Works with
+  //                        Formspree, Web3Forms, Basin, or your own API route.
+  //
+  // A form pointed at the wrong provider fails silently. The visitor sees a
+  // success page and you never get the lead, so the build refuses to call
+  // itself clean until this is set correctly for wherever you actually deploy.
+  // ---------------------------------------------------------------------------
+  forms: {
+    provider: 'external',
+    endpoint: TODO('https://formspree.io/f/YOUR_FORM_ID'),
+  },
+
+  // ---------------------------------------------------------------------------
   // Navigation. Order here is the order in the header.
   // ---------------------------------------------------------------------------
   nav: [
