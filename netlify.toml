@@ -1,0 +1,52 @@
+[build]
+  command = "npm run images && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Netlify Forms picks up the three forms automatically from the built HTML
+# because each carries data-netlify="true" and a matching hidden form-name
+# input. Submissions land in the Netlify dashboard under Forms. Set up email
+# notifications there so quote requests reach a phone and not just a webpage.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+
+# Pretty URLs: /services and /services/ both resolve.
+[[redirects]]
+  from = "/services"
+  to = "/services/"
+  status = 301
+
+[[redirects]]
+  from = "/quote"
+  to = "/quote/"
+  status = 301
+
+[[redirects]]
+  from = "/drivers"
+  to = "/drivers/"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/safety"
+  to = "/safety/"
+  status = 301
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq/"
+  status = 301

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }}</title>
+<meta name="description" content="{{ page.description }}">
+<meta name="robots" content="{{ page.robots }}">
+<link rel="canonical" href="{{ page.canonical }}">
+{{{ html.verification }}}
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ company.legalName }}">
+<meta property="og:title" content="{{ page.title }}">
+<meta property="og:description" content="{{ page.description }}">
+<meta property="og:url" content="{{ page.canonical }}">
+<meta property="og:image" content="{{ page.ogImage }}">
+<meta property="og:image:alt" content="{{ company.legalName }}, USDOT {{ authority.usdot }}">
+<meta property="og:locale" content="{{ site.locale }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.title }}">
+<meta name="twitter:description" content="{{ page.description }}">
+<meta name="twitter:image" content="{{ page.ogImage }}">
+
+<meta name="theme-color" content="#0A0F1A">
+<meta name="format-detection" content="telephone=yes">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/assets/css/styles.css">
+
+{{{ html.schema }}}
+{{{ html.analytics }}}
+</head>
+<body class="{{ page.bodyClass }}">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+{{> header }}
+
+<main id="main">
+{{{ content }}}
+</main>
+
+{{> footer }}
+
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>

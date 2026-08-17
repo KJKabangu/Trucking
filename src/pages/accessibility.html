@@ -1,0 +1,72 @@
+<!--meta {
+  "title": "Accessibility Statement | GFK Transport LLC",
+  "description": "How GFK Transport LLC approaches website accessibility, and how to report a barrier you run into.",
+  "path": "/accessibility/",
+  "breadcrumb": "Accessibility",
+  "priority": 0.3,
+  "changefreq": "yearly"
+} -->
+
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Accessibility</li>
+      </ol>
+    </nav>
+    <h1>Accessibility</h1>
+    <p>This site is built to be usable by everyone, including people using assistive technology.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="prose">
+      <h2>Our approach</h2>
+      <p>
+        We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.1 at
+        Level AA. In practice that means the site is built with the following in
+        place:
+      </p>
+      <ul>
+        <li>Semantic HTML with a single, logical heading order on every page</li>
+        <li>A skip link so keyboard users can bypass the navigation</li>
+        <li>Visible focus indicators on every interactive element</li>
+        <li>Full keyboard operability, including the mobile menu and the FAQ</li>
+        <li>Text and interface colors that meet AA contrast ratios</li>
+        <li>Form fields with real labels, clear required-field marking, and helpful hints</li>
+        <li>Text that reflows without loss of content at 200 percent zoom</li>
+        <li>Respect for the operating system reduced-motion preference</li>
+        <li>No content that flashes or auto-plays</li>
+      </ul>
+
+      <h2>Known limitations</h2>
+      <p>
+        We link to the FMCSA carrier lookup, which is a government site outside
+        our control. We cannot guarantee the accessibility of pages we do not
+        operate.
+      </p>
+
+      <h2>Tell us if something does not work</h2>
+      <p>
+        If you hit a barrier on this site, we want to fix it. Describe what you
+        were trying to do, the page you were on, and the browser or assistive
+        technology you were using.
+      </p>
+      <p>
+        Email <a href="mailto:{{ contact.email }}">{{ contact.email }}</a> or call
+        {{ contact.phone }}. We will respond and, where the fix is within our
+        control, correct it.
+      </p>
+
+      <h2>Getting a quote another way</h2>
+      <p>
+        If the quote form is difficult to use for any reason, call
+        <a href="{{ $.phoneHref }}">{{ contact.phone }}</a> during office hours and
+        we will take the details over the phone. You will get the same rate and
+        the same service either way.
+      </p>
+    </div>
+  </div>
+</section>

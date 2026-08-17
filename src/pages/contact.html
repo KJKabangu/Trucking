@@ -1,0 +1,145 @@
+<!--meta {
+  "title": "Contact GFK Transport LLC | Dispatch, Rates and Careers",
+  "description": "Reach GFK Transport LLC dispatch by phone or email. Office hours, address, and a contact form for rates, paperwork, and general questions.",
+  "path": "/contact/",
+  "breadcrumb": "Contact",
+  "priority": 0.8,
+  "changefreq": "monthly"
+} -->
+
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Contact</li>
+      </ol>
+    </nav>
+    <h1>Get in touch</h1>
+    <p>
+      For a rate on a specific load, the <a href="/quote/" style="color: #f5a524">quote form</a>
+      gets you an answer faster because it asks for everything we need. For
+      anything else, use whatever below is easiest.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="form-shell">
+      <form
+        class="form"
+        name="contact"
+        method="POST"
+        action="/thank-you/?type=contact"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        data-guard
+      >
+        <input type="hidden" name="form-name" value="contact">
+        <p class="hp" aria-hidden="true">
+          <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">Send us a message</legend>
+          <div class="field-grid">
+            <div class="field">
+              <label for="c-name">Your name <span class="req" aria-hidden="true">*</span></label>
+              <input id="c-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="c-company">Company</label>
+              <input id="c-company" name="company" type="text" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="c-email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input id="c-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="c-phone">Phone</label>
+              <input id="c-phone" name="phone" type="tel" autocomplete="tel">
+            </div>
+            <div class="field field--full">
+              <label for="c-topic">What is this about? <span class="req" aria-hidden="true">*</span></label>
+              <select id="c-topic" name="topic" required>
+                <option value="">Select a topic</option>
+                <option value="New shipment">A new shipment</option>
+                <option value="Existing load">A load already in transit</option>
+                <option value="Carrier packet">Carrier packet, insurance certificate, or W-9</option>
+                <option value="Billing">Billing or payment</option>
+                <option value="Claim">A damage or shortage claim</option>
+                <option value="Driving job">Driving job</option>
+                <option value="Safety concern">Safety concern about one of our trucks</option>
+                <option value="Other">Something else</option>
+              </select>
+            </div>
+            <div class="field field--full">
+              <label for="c-message">Message <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="c-message" name="message" required></textarea>
+            </div>
+            <div class="field field--full">
+              <label class="checkbox">
+                <input type="checkbox" name="consent" value="yes" required>
+                <span>
+                  I agree that {{ company.shortName }} may reply to me by phone or
+                  email. <span class="req" aria-hidden="true">*</span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form__footer">
+          <button class="btn btn--primary btn--lg" type="submit">Send message</button>
+          <p class="form__note">
+            Messages sent outside office hours are answered the next business
+            morning. Loads already in transit are covered around the clock by
+            phone.
+          </p>
+        </div>
+      </form>
+
+      <aside>
+        <div class="aside-card">
+          <h2>Dispatch</h2>
+          <ul class="contact-list">
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
+              <span><a href="{{ $.phoneHref }}">{{ contact.phone }}</a><br>Loads, rates, and trucks in transit</span>
+            </li>
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>
+              <span><a href="mailto:{{ contact.email }}">{{ contact.email }}</a><br>General and paperwork</span>
+            </li>
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span>
+                <a href="{{ $.mapsUrl }}" target="_blank" rel="noopener">{{ contact.address.street }}</a><br>
+                {{ contact.address.city }}, {{ contact.address.state }} {{ contact.address.zip }}
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="aside-card aside-card--light">
+          <h3>Office hours</h3>
+          <dl class="hours">{{{ html.hoursList }}}</dl>
+          <p style="margin-top: 1rem; font-size: 0.875rem">{{ contact.hoursNote }}</p>
+        </div>
+
+        <div class="aside-card aside-card--light">
+          <h3>Carrier details</h3>
+          <dl>
+            <div class="spec-row"><dt>Legal name</dt><dd>{{ company.legalName }}</dd></div>
+            <div class="spec-row"><dt>USDOT</dt><dd>{{ authority.usdot }}</dd></div>
+            <div class="spec-row"><dt>MC docket</dt><dd>{{ authority.mc }}</dd></div>
+          </dl>
+          <p style="margin-top: 1rem">
+            <a href="{{ authority.saferUrl }}" target="_blank" rel="noopener">Verify with the FMCSA &nearr;</a>
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,17 @@
+# Netlify redirect rules. First match wins.
+
+# Common alternate paths people type or that old links point at.
+/services/*        /services/            301
+/quote.html        /quote/               301
+/contact.html      /contact/             301
+/about.html        /about/               301
+/index.html        /                     301
+/careers           /drivers/             301
+/careers/*         /drivers/             301
+/jobs              /drivers/             301
+/drivers/apply     /drivers/#apply       301
+/get-a-quote       /quote/               301
+/request-a-quote   /quote/               301
+/insurance         /safety/              301
+/compliance        /safety/              301
+/faqs              /faq/                 301

@@ -1,0 +1,161 @@
+<!--meta {
+  "title": "Safety, Insurance and Compliance | GFK Transport LLC USDOT 2367819",
+  "description": "Carrier credentials for GFK Transport LLC. USDOT 2367819, MC 812027, insurance coverage, FMCSA compliance, and how to request our certificate of insurance and W-9.",
+  "path": "/safety/",
+  "breadcrumb": "Safety and compliance",
+  "priority": 0.8,
+  "changefreq": "monthly"
+} -->
+
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Safety and compliance</li>
+      </ol>
+    </nav>
+    <h1>Safety and compliance</h1>
+    <p>
+      Everything you need to vet us as a carrier, in one place. If your
+      procurement team needs something not listed here, ask and we will send it.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">At a glance</p>
+      <h2>Credentials</h2>
+    </div>
+    <div class="grid grid--3">
+      <div class="card">
+        <span class="card__icon">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v5.5c0 4.5-3 8.3-7.5 9.5-4.5-1.2-7.5-5-7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        </span>
+        <h3 class="card__title">USDOT {{ authority.usdot }}</h3>
+        <p class="card__body">
+          Active interstate operating authority. Our full safety record,
+          inspection history, and insurance filings are public on the FMCSA
+          system.
+        </p>
+        <a class="card__more" href="{{ authority.saferUrl }}" target="_blank" rel="noopener">Look us up &nearr;</a>
+      </div>
+      <div class="card">
+        <span class="card__icon">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg>
+        </span>
+        <h3 class="card__title">MC {{ authority.mc }}</h3>
+        <p class="card__body">
+          Motor carrier docket number issued by the FMCSA. Held continuously
+          since {{ company.foundedYear }} under the same ownership.
+        </p>
+      </div>
+      <div class="card">
+        <span class="card__icon">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+        </span>
+        <h3 class="card__title">Insurance on file</h3>
+        <p class="card__body">
+          Auto liability and cargo coverage filed with the FMCSA and maintained
+          continuously. Certificates naming you as holder go out on request.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="form-shell">
+      <div class="prose">
+        <h2>Insurance coverage</h2>
+        <p>
+          A certificate of insurance naming your company as certificate holder
+          is issued before the first load and renewed automatically each policy
+          term.
+        </p>
+        {{{ html.insuranceBlock }}}
+
+        <h2>Driver qualification</h2>
+        <p>
+          Every driver operating under our authority is qualified before they
+          touch a truck and monitored continuously afterward:
+        </p>
+        <ul>
+          <li>Valid Class A CDL verified against the issuing state</li>
+          <li>Motor vehicle record pulled at hire and reviewed annually</li>
+          <li>Previous employer verification for the last three years</li>
+          <li>DOT physical with a certified medical examiner, kept current</li>
+          <li>Pre-employment drug screening plus random testing in an active consortium</li>
+          <li>Clearinghouse queries at hire and annually thereafter</li>
+        </ul>
+
+        <h2>Hours of service</h2>
+        <p>
+          Our trucks run electronic logging devices as required under
+          49 CFR Part 395. Hours are monitored, violations are reviewed with the
+          driver, and we do not ask a driver to run past legal hours to save an
+          appointment. A missed appointment costs a day. The alternative can cost
+          considerably more.
+        </p>
+
+        <h2>Equipment and maintenance</h2>
+        <p>
+          Tractors and trailers are on a scheduled preventive maintenance
+          program with documented inspections. Drivers complete pre-trip and
+          post-trip inspection reports, and any defect affecting safe operation
+          takes the unit out of service until it is repaired.
+        </p>
+
+        <h2>Cargo securement</h2>
+        <p>
+          Loads are secured to the FMCSA cargo securement standards in
+          49 CFR Part 393 Subpart I, using load bars, straps, and blocking as
+          the freight requires. Drivers re-check securement within the first 50
+          miles and at every required interval after that.
+        </p>
+
+        <h2>If something goes wrong</h2>
+        <p>
+          Damage or shortage should be noted on the delivery receipt before the
+          driver leaves, photographed, and reported to us the same day. We open
+          the claim against our cargo policy, give you a single point of contact,
+          and stay with it until it closes. Concealed damage should be reported
+          as soon as it is discovered.
+        </p>
+      </div>
+
+      <aside>
+        <div class="aside-card">
+          <h3>Request documents</h3>
+          <p>
+            Certificate of insurance, W-9, carrier packet, and signed
+            authority. Sent same business day.
+          </p>
+          <ul class="contact-list">
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>
+              <span><a href="mailto:{{ $.emailSafety }}?subject=Carrier%20packet%20request">{{ $.emailSafety }}</a><br>Compliance and documents</span>
+            </li>
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
+              <span><a href="{{ $.phoneHref }}">{{ contact.phone }}</a><br>Ask for compliance</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="aside-card aside-card--light">
+          <h3>Reporting a safety concern</h3>
+          <p>
+            If one of our trucks is operating unsafely, we want to know
+            immediately. Note the unit number, location, time, and direction of
+            travel, then call {{ contact.phone }}. Every report is reviewed by an
+            owner.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

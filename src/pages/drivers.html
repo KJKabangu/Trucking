@@ -1,0 +1,231 @@
+<!--meta {
+  "title": "Driver Jobs, Class A CDL and Box Truck | GFK Transport LLC",
+  "description": "Now hiring Class A CDL and box truck drivers at GFK Transport LLC. Owner-operated carrier since 2013, USDOT 2367819. Apply online in a few minutes.",
+  "path": "/drivers/",
+  "breadcrumb": "Drivers",
+  "priority": 0.8,
+  "changefreq": "monthly"
+} -->
+
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Drivers</li>
+      </ol>
+    </nav>
+    <h1>{{ drivers.headline }}</h1>
+    <p>{{ drivers.intro }}</p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="stats__grid" style="border: 0; padding-block: 0">
+      <div class="stat">
+        <p class="stat__value">{{ $.years }}</p>
+        <p class="stat__label">Years in operation</p>
+      </div>
+      <div class="stat">
+        <p class="stat__value">2</p>
+        <p class="stat__label">Owners you can call directly</p>
+      </div>
+      <div class="stat">
+        <p class="stat__value">2</p>
+        <p class="stat__label">Seats open: Class A and box truck</p>
+      </div>
+      <div class="stat">
+        <p class="stat__value">Now</p>
+        <p class="stat__label">Hiring, and an owner reads every application</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{{ html.driverOfferSection }}}
+
+<section class="section">
+  <div class="container">
+    <div class="form-shell">
+      <div>
+        <p class="eyebrow">Before you apply</p>
+        <h2>What we need from you</h2>
+        <p class="lead" style="margin-top: 1rem; margin-bottom: 1.75rem">
+          We hire for two different seats, and they do not have the same
+          requirements. Our insurance sets most of these and we cannot make
+          exceptions, so please check before spending time on an application.
+        </p>
+
+        <h3 style="margin-bottom: 0.75rem">Class A, over the road</h3>
+        <ul class="spec-list">
+          {{{ html.driverRequirements }}}
+        </ul>
+
+        {{{ html.boxTruckBlock }}}
+
+        <p style="margin-top: 1.5rem; font-size: 0.875rem">
+          Close but not quite? Apply anyway and tell us the situation in the
+          notes. We would rather read it than guess.
+        </p>
+      </div>
+
+      <aside>
+        <div class="aside-card">
+          <h3>Questions before applying?</h3>
+          <p>Call and ask for an owner. No recruiter script, no callback queue.</p>
+          <ul class="contact-list">
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
+              <span><a href="{{ $.phoneHref }}">{{ contact.phone }}</a><br>Ask for hiring</span>
+            </li>
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>
+              <span><a href="mailto:{{ $.emailCareers }}">{{ $.emailCareers }}</a><br>Careers</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark" id="apply">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Application</p>
+      <h2>Apply to drive</h2>
+      <p class="lead">
+        Takes about five minutes. An owner reads every one of these, and you will
+        hear back either way.
+      </p>
+    </div>
+
+    <form
+      class="form"
+      name="driver-application"
+      method="POST"
+      action="/thank-you/?type=driver"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      data-guard
+    >
+      <input type="hidden" name="form-name" value="driver-application">
+      <p class="hp" aria-hidden="true">
+        <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset__legend">About you</legend>
+        <div class="field-grid">
+          <div class="field">
+            <label for="d-name">Full name <span class="req" aria-hidden="true">*</span></label>
+            <input id="d-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="d-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+            <input id="d-phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="field">
+            <label for="d-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="d-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="d-location">City and state you live in <span class="req" aria-hidden="true">*</span></label>
+            <input id="d-location" name="location" type="text" autocomplete="address-level2" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset__legend">License and experience</legend>
+        <div class="field-grid">
+          <div class="field field--full">
+            <label for="d-position">Which seat are you applying for? <span class="req" aria-hidden="true">*</span></label>
+            <select id="d-position" name="position" required>
+              <option value="">Select</option>
+              {{{ html.driverPositions }}}
+              <option value="Either">Either one</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="d-cdl-state">
+              License issuing state <span class="req" aria-hidden="true">*</span>
+              <span class="hint">CDL state, or your regular license state for box truck</span>
+            </label>
+            <input id="d-cdl-state" name="cdl_state" type="text" required>
+          </div>
+          <div class="field">
+            <label for="d-experience">Years of OTR experience <span class="req" aria-hidden="true">*</span></label>
+            <select id="d-experience" name="experience" required>
+              <option value="">Select</option>
+              <option value="Less than 1 year">Less than 1 year</option>
+              <option value="1 to 2 years">1 to 2 years</option>
+              <option value="2 to 5 years">2 to 5 years</option>
+              <option value="5 to 10 years">5 to 10 years</option>
+              <option value="10+ years">More than 10 years</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="d-endorsements">
+              Endorsements
+              <span class="hint">Hazmat, tanker, doubles or triples, TWIC</span>
+            </label>
+            <input id="d-endorsements" name="endorsements" type="text" placeholder="None, or list them">
+          </div>
+          <div class="field">
+            <label for="d-equipment">Equipment you have run</label>
+            <select id="d-equipment" name="equipment">
+              <option value="">Select</option>
+              <option value="Dry van">Dry van</option>
+              <option value="Box truck">Box truck or straight truck</option>
+              <option value="Refrigerated">Refrigerated</option>
+              <option value="Flatbed">Flatbed or step deck</option>
+              <option value="Multiple">Multiple types</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="d-available">Available to start</label>
+            <input id="d-available" name="available" type="date" data-no-past>
+          </div>
+          <div class="field field--full">
+            <label for="d-record">
+              Accidents or violations in the last 3 years <span class="req" aria-hidden="true">*</span>
+              <span class="hint">Be straight with us. We pull the MVR either way, and honesty here is not disqualifying by itself.</span>
+            </label>
+            <textarea id="d-record" name="driving_record" required placeholder="None, or describe what happened and when."></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset__legend">Anything else</legend>
+        <div class="field-grid">
+          <div class="field field--full">
+            <label for="d-notes">Questions or notes</label>
+            <textarea id="d-notes" name="notes" placeholder="Home time needs, referral, anything you want us to know."></textarea>
+          </div>
+          <div class="field field--full">
+            <label class="checkbox">
+              <input type="checkbox" name="consent" value="yes" required>
+              <span>
+                I confirm the information above is accurate and I consent to
+                {{ company.shortName }} contacting me about this application.
+                <span class="req" aria-hidden="true">*</span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form__footer">
+        <button class="btn btn--primary btn--lg" type="submit">Submit application</button>
+        <p class="form__note">
+          This is an initial interest form, not a DOT employment application.
+          If we move forward, you will complete the full application, MVR
+          authorization, and background release then.
+        </p>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+# Netlify header rules. Cloudflare Pages reads this file too.
+# If you move to another host, port these to its equivalent config.
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  # No inline styles or scripts are used except the small style attributes in
+  # the page markup, hence 'unsafe-inline' for styles only. Scripts stay strict.
+  # If you enable Google Analytics, add its domains to script-src and connect-src.
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+# Fingerprinted assets could be cached forever, but these filenames are stable,
+# so a week with revalidation is the honest setting.
+/assets/*
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/*.png
+  Cache-Control: public, max-age=604800
+
+/*.svg
+  Cache-Control: public, max-age=604800

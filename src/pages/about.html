@@ -1,0 +1,179 @@
+<!--meta {
+  "title": "About GFK Transport LLC | Family-Owned Carrier Since 2013",
+  "description": "Cibi Muhindo and Kabangu Biayi came from the Democratic Republic of the Congo in the 1990s and founded GFK Transport in 2013. USDOT 2367819, MC 812027.",
+  "path": "/about/",
+  "breadcrumb": "About",
+  "priority": 0.7,
+  "changefreq": "yearly"
+} -->
+
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">About</li>
+      </ol>
+    </nav>
+    <h1>{{ $.years }} years, two owners, one standard</h1>
+    <p>
+      {{ company.legalName }} has been moving freight since {{ company.foundedYear }}.
+      Same owners, same authority, same expectation that a load arrives when we
+      said it would.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">How this started</p>
+      <h2>From the Congo to their own authority</h2>
+    </div>
+    {{{ html.owners }}}
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="form-shell">
+      <div class="prose">
+        <h2>How the company is built</h2>
+        <p>
+          There is no holding company above us and no sales floor between you and
+          the people who decide where the trucks go.
+        </p>
+        <p>
+          That structure is the whole point. In a large carrier, the person who
+          quotes your freight, the person who dispatches it, and the person who
+          answers when it is late are three different people with three different
+          incentives. Here they are the same two people, and they carry the
+          consequences of a bad promise directly.
+        </p>
+
+        <h2>How we work</h2>
+        <p>
+          We quote what we can actually cover. If our equipment is committed or
+          the lane does not fit our network that week, we say so instead of
+          taking the load and hoping. A carrier that over-commits is how freight
+          ends up sitting on a dock at 4pm on a Friday.
+        </p>
+        <p>
+          We are asset based, which means the truck that picks up your freight is
+          our truck and the driver is our driver. Nothing you tender to us gets
+          quietly re-posted to a load board. If we ever cannot cover something
+          ourselves, you will hear that from us before you plan around it.
+        </p>
+
+        <h2>What {{ $.years }} years teaches you</h2>
+        <p>
+          Mostly that the boring things decide everything. Pre-trip inspections
+          that get done properly. Securement that assumes the worst road
+          condition and not the best. Hours-of-service discipline even when
+          running an extra ninety minutes would make the appointment. Paperwork
+          that goes out the same day instead of at the end of the month.
+        </p>
+        <p>
+          None of that is impressive to talk about. It is the difference between
+          a carrier you use once and a carrier you put on a dedicated lane.
+        </p>
+      </div>
+
+      <aside>
+        <div class="aside-card">
+          <h3>Credentials</h3>
+          <dl>
+            <div class="spec-row" style="border-bottom-color: rgb(255 255 255 / 0.12)">
+              <dt style="color: #9fadc4">USDOT</dt>
+              <dd style="color: #fff">{{ authority.usdot }}</dd>
+            </div>
+            <div class="spec-row" style="border-bottom-color: rgb(255 255 255 / 0.12)">
+              <dt style="color: #9fadc4">MC docket</dt>
+              <dd style="color: #fff">{{ authority.mc }}</dd>
+            </div>
+            <div class="spec-row" style="border-bottom-color: rgb(255 255 255 / 0.12)">
+              <dt style="color: #9fadc4">Entity type</dt>
+              <dd style="color: #fff">Motor carrier</dd>
+            </div>
+            <div class="spec-row">
+              <dt style="color: #9fadc4">Operating since</dt>
+              <dd style="color: #fff">{{ company.foundedYear }}</dd>
+            </div>
+          </dl>
+          <p style="margin-top: 1rem">
+            <a class="hero__verify" href="{{ authority.saferUrl }}" target="_blank" rel="noopener">
+              Verify with the FMCSA <span aria-hidden="true">&nearr;</span>
+            </a>
+          </p>
+        </div>
+        <div class="aside-card aside-card--light">
+          <h3>Working with us</h3>
+          <p>
+            New shippers get a certificate of insurance and our W-9 before the
+            first load. Ask and it goes out the same day.
+          </p>
+          <div class="btn-row" style="margin-top: 1.25rem">
+            <a class="btn btn--dark" href="/contact/">Get in touch</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Ownership</p>
+      <h2>Who handles what</h2>
+      <p class="lead">
+        Both owners are reachable. That is unusual at this point in a company's
+        life, and we intend to keep it that way.
+      </p>
+    </div>
+    {{{ html.ownerBios }}}
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="section__head section__head--center">
+      <p class="eyebrow">What we hold to</p>
+      <h2>Four commitments we will not trade away</h2>
+    </div>
+    <div class="grid grid--2">
+      <div class="pillar">
+        <h3>Say the real date</h3>
+        <p>
+          An honest delivery date you can plan around beats an optimistic one
+          that collapses. If a lane cannot make your appointment, we tell you
+          before you book, not after.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>Price it once</h3>
+        <p>
+          Accessorials get named in the quote. Detention, liftgate, driver
+          assist, and layover rates are agreed before the truck rolls, so the
+          invoice matches the number you approved.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>Own the problem</h3>
+        <p>
+          Freight gets delayed and occasionally damaged. What separates carriers
+          is who calls whom first. We call you, with what happened and what we
+          are doing about it.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>Keep the drivers</h3>
+        <p>
+          Carriers with constant driver turnover give you a different person
+          every trip who does not know your dock. We would rather pay and treat
+          drivers well enough that you see the same faces.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

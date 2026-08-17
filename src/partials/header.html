@@ -1,0 +1,49 @@
+<div class="topbar">
+  <div class="container topbar__inner">
+    <p class="topbar__creds">
+      <span>USDOT <strong>{{ authority.usdot }}</strong></span>
+      <span aria-hidden="true" class="topbar__sep"></span>
+      <span>MC <strong>{{ authority.mc }}</strong></span>
+      <span aria-hidden="true" class="topbar__sep"></span>
+      <span class="topbar__hide-sm">{{ $.years }} years in business</span>
+    </p>
+    <p class="topbar__contact">
+      <a href="{{ $.phoneHref }}">Dispatch: {{ contact.phone }}</a>
+    </p>
+  </div>
+</div>
+
+<header class="header" id="site-header">
+  <div class="container header__inner">
+    <a class="logo" href="/" aria-label="{{ company.legalName }} home">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+          <rect width="40" height="40" rx="9" fill="currentColor"/>
+          <path d="M8 11h13v13H8z" fill="#0A0F1A"/><path d="M21 24V15h5l5 4.5V24z" fill="#0A0F1A"/>
+          <circle cx="13" cy="26" r="2.9" fill="#0A0F1A"/>
+          <circle cx="27" cy="26" r="2.9" fill="#0A0F1A"/>
+        </svg>
+      </span>
+      <span class="logo__text">
+        <span class="logo__name">{{ company.initials }}</span>
+        <span class="logo__sub">Transport LLC</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+    </button>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <ul class="nav__list">
+        {{{ html.navLinks }}}
+      </ul>
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm" href="{{ $.phoneHref }}">Call dispatch</a>
+        <a class="btn btn--primary btn--sm" href="/quote/">Request a quote</a>
+      </div>
+    </nav>
+  </div>
+</header>

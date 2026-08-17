@@ -1,0 +1,209 @@
+<!--meta {
+  "title": "GFK Transport LLC | Dry Van and Box Truck Freight Carrier",
+  "description": "Owner-operated dry van and box truck carrier since 2013. Full truckload, partial, and expedited freight with same-day rate quotes. USDOT 2367819, MC 812027.",
+  "path": "/",
+  "priority": 1.0,
+  "changefreq": "weekly"
+} -->
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="hero__eyebrow"><span class="hero__dot" aria-hidden="true"></span> Family owned and asset based since {{ company.foundedYear }}</p>
+      <h1>Freight that shows up <em>when we said it would.</em></h1>
+      <p class="hero__sub">
+        {{ company.legalName }} runs dry van and box truck capacity for shippers
+        who are tired of chasing their own loads for a status update.
+        {{ $.years }} years, two owners, and the same phone number the whole time.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="/quote/">Request a quote</a>
+        <a class="btn btn--outline btn--lg" href="{{ $.phoneHref }}">Call {{ contact.phone }}</a>
+      </div>
+      <p class="hero__note">Send a lane before noon and you will have a rate the same day.</p>
+    </div>
+
+    <div class="hero__panel">
+      <h2>Verify us before you book</h2>
+      <p>Our operating authority is public. Look it up before you send a load, not after.</p>
+      <dl class="cred-grid">
+        <div class="cred">
+          <dt>USDOT</dt>
+          <dd>{{ authority.usdot }}</dd>
+        </div>
+        <div class="cred">
+          <dt>MC Docket</dt>
+          <dd>{{ authority.mc }}</dd>
+        </div>
+        <div class="cred">
+          <dt>Operating since</dt>
+          <dd>{{ company.foundedYear }}</dd>
+        </div>
+        <div class="cred">
+          <dt>Authority</dt>
+          <dd>Active</dd>
+        </div>
+      </dl>
+      <a class="hero__verify" href="{{ authority.saferUrl }}" target="_blank" rel="noopener">
+        Check our FMCSA record <span aria-hidden="true">&nearr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container stats__grid">
+    <div class="stat">
+      <p class="stat__value">{{ $.years }}</p>
+      <p class="stat__label">Years hauling freight</p>
+    </div>
+    <div class="stat">
+      <p class="stat__value">100<span>%</span></p>
+      <p class="stat__label">Asset based, never re-brokered</p>
+    </div>
+    <div class="stat">
+      <p class="stat__value">Same<span>-</span>day</p>
+      <p class="stat__label">Rate quotes on weekdays</p>
+    </div>
+    <div class="stat">
+      <p class="stat__value">24<span>/</span>7</p>
+      <p class="stat__label">Support while freight is moving</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head section__head--center">
+      <p class="eyebrow">What we haul</p>
+      <h2>Equipment for the freight you actually ship</h2>
+      <p class="lead">
+        A 53-foot trailer when the load fills one, a box truck when it does not.
+        If you are not sure which fits, describe the freight and we will tell you
+        honestly, including when the answer is a carrier other than us.
+      </p>
+    </div>
+    {{{ html.serviceCards }}}
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Why shippers stay</p>
+      <h2>Small carrier. That is the feature, not the caveat.</h2>
+      <p class="lead">
+        Large carriers give you a portal and a case number. We give you the
+        number of the person who decides where the truck goes.
+      </p>
+    </div>
+    <div class="grid grid--2">
+      <div class="pillar">
+        <h3>The owners answer the phone</h3>
+        <p>
+          {{ company.ownersLabel }} founded this company and still run it day to
+          day. When you call about a load in transit, you are talking to someone
+          who can actually change what happens next.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>Your load stays our load</h3>
+        <p>
+          We are asset based. Freight you tender to us moves on our trucks with
+          our drivers. It does not get re-posted to a load board while you assume
+          it is handled.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>Updates before you ask</h3>
+        <p>
+          You hear from us at pickup, in transit, and at delivery. If something
+          slips, you find out from us first, with a revised ETA and a reason.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>{{ $.years }} years of not cutting corners</h3>
+        <p>
+          Securement, hours of service, and pre-trip inspections are not where we
+          save money. A carrier that runs loose on compliance eventually runs
+          your freight into a problem.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps from lane to delivered</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h3>Tell us the load</h3>
+        <p>
+          Origin, destination, commodity, weight, and when it needs to move.
+          Anything unusual about the dock, the receiver, or the handling helps
+          us quote it right the first time.
+        </p>
+      </div>
+      <div class="step">
+        <h3>Get a real rate</h3>
+        <p>
+          One number, all in, with accessorials named up front. No fuel surcharge
+          discovered later and no reclass surprise on the invoice.
+        </p>
+      </div>
+      <div class="step">
+        <h3>Track it to the dock</h3>
+        <p>
+          Confirmation at pickup, updates in transit, and signed paperwork after
+          delivery, normally the same day it lands.
+        </p>
+      </div>
+    </div>
+    <div class="btn-row" style="margin-top: 2.5rem">
+      <a class="btn btn--dark btn--lg" href="/quote/">Start with a quote</a>
+      <a class="btn btn--ghost btn--lg" href="/services/">Compare equipment</a>
+    </div>
+  </div>
+</section>
+
+{{{ html.coverageSection }}}
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="form-shell">
+      <div>
+        <p class="eyebrow">Common questions</p>
+        <h2>Answers before you have to ask</h2>
+        <p class="lead" style="margin-top: 1rem">
+          The questions brokers and shipping managers ask us most. The full list
+          is on the FAQ page.
+        </p>
+        <a class="btn btn--dark" href="/faq/" style="margin-top: 1.5rem">Read all questions</a>
+      </div>
+      <div class="faq" style="max-width: none">
+        {{{ html.faqShort }}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="cta-band__inner" style="padding: 0">
+      <div>
+        <p class="eyebrow">Now hiring</p>
+        <h2>Class A and box truck drivers, we are hiring</h2>
+        <p class="lead" style="margin-top: 0.75rem; max-width: 46ch">
+          {{ drivers.intro }}
+        </p>
+      </div>
+      <div class="cta-band__actions">
+        <a class="btn btn--primary btn--lg" href="/drivers/">See driver openings</a>
+      </div>
+    </div>
+  </div>
+</section>

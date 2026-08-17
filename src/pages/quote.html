@@ -1,0 +1,213 @@
+<!--meta {
+  "title": "Request a Freight Quote | GFK Transport LLC",
+  "description": "Get a same-day freight rate from GFK Transport LLC. Dry van, box truck, expedited, and partial truckload. USDOT 2367819, MC 812027.",
+  "path": "/quote/",
+  "breadcrumb": "Request a quote",
+  "priority": 0.9,
+  "changefreq": "monthly"
+} -->
+
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Request a quote</li>
+      </ol>
+    </nav>
+    <h1>Request a rate</h1>
+    <p>
+      Fill in what you know. Anything you leave blank we will ask about, but the
+      more you give us now the faster the number comes back. Weekday requests are
+      answered the same business day.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="form-shell">
+      <form
+        class="form"
+        name="quote"
+        method="POST"
+        action="/thank-you/?type=quote"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        data-guard
+      >
+        <input type="hidden" name="form-name" value="quote">
+        <p class="hp" aria-hidden="true">
+          <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">Your details</legend>
+          <div class="field-grid">
+            <div class="field">
+              <label for="name">Your name <span class="req" aria-hidden="true">*</span></label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="company">Company <span class="req" aria-hidden="true">*</span></label>
+              <input id="company" name="company" type="text" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone <span class="req" aria-hidden="true">*</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">The lane</legend>
+          <div class="field-grid">
+            <div class="field">
+              <label for="origin">Pickup city, state and ZIP <span class="req" aria-hidden="true">*</span></label>
+              <input id="origin" name="origin" type="text" placeholder="Chicago, IL 60601" required>
+            </div>
+            <div class="field">
+              <label for="destination">Delivery city, state and ZIP <span class="req" aria-hidden="true">*</span></label>
+              <input id="destination" name="destination" type="text" placeholder="Dallas, TX 75201" required>
+            </div>
+            <div class="field">
+              <label for="pickup-date">Pickup date <span class="req" aria-hidden="true">*</span></label>
+              <input id="pickup-date" name="pickup_date" type="date" data-no-past required>
+            </div>
+            <div class="field">
+              <label for="delivery-date">Delivery date needed</label>
+              <input id="delivery-date" name="delivery_date" type="date" data-no-past>
+            </div>
+            <div class="field field--full">
+              <label for="frequency">How often does this lane run?</label>
+              <select id="frequency" name="frequency">
+                <option value="One time">One time shipment</option>
+                <option value="Occasional">Occasional, a few times a year</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Weekly">Weekly, interested in a dedicated lane</option>
+                <option value="Multiple per week">Multiple times per week</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">The freight</legend>
+          <div class="field-grid">
+            <div class="field">
+              <label for="service">Equipment needed <span class="req" aria-hidden="true">*</span></label>
+              <select id="service" name="service" required>
+                <option value="">Select equipment</option>
+                {{{ html.serviceOptions }}}
+                <option value="Not sure">Not sure, please advise</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="weight">Total weight <span class="req" aria-hidden="true">*</span></label>
+              <input id="weight" name="weight" type="text" placeholder="18,400 lbs" required>
+            </div>
+            <div class="field field--full">
+              <label for="commodity">What is the commodity? <span class="req" aria-hidden="true">*</span></label>
+              <input id="commodity" name="commodity" type="text" placeholder="Palletized canned goods" required>
+            </div>
+            <div class="field">
+              <label for="pieces">Pallets or piece count</label>
+              <input id="pieces" name="pieces" type="text" placeholder="22 pallets, stackable">
+            </div>
+            <div class="field">
+              <label for="dimensions">
+                Dimensions
+                <span class="hint">Length, width, height, or linear feet for partials</span>
+              </label>
+              <input id="dimensions" name="dimensions" type="text" placeholder="48 x 40 x 60 in">
+            </div>
+            <div class="field field--full">
+              <label for="dock">
+                Dock access
+                <span class="hint">Tell us if either end has no dock, a tight yard, or needs a liftgate</span>
+              </label>
+              <input id="dock" name="dock_access" type="text" placeholder="Dock at pickup, no dock at delivery">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">Anything else</legend>
+          <div class="field-grid">
+            <div class="field field--full">
+              <label for="notes">
+                Special requirements or notes
+                <span class="hint">Appointments, liftgate, driver assist, inside delivery, declared value</span>
+              </label>
+              <textarea id="notes" name="notes" placeholder="Receiver is FCFS 6am to 1pm. No overnight parking on site."></textarea>
+            </div>
+            <div class="field field--full">
+              <label class="checkbox">
+                <input type="checkbox" name="consent" value="yes" required>
+                <span>
+                  I agree that {{ company.shortName }} may contact me about this
+                  request by phone or email. <span class="req" aria-hidden="true">*</span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form__footer">
+          <button class="btn btn--primary btn--lg" type="submit">Send quote request</button>
+          <p class="form__note">
+            We use your details to quote and move your freight. We do not sell
+            them. See our <a href="/privacy/">privacy policy</a>.
+          </p>
+        </div>
+      </form>
+
+      <aside>
+        <div class="aside-card">
+          <h2>Need it faster?</h2>
+          <p>
+            For same-day pickups and line-down situations, call. A form is
+            slower than a phone at 6am.
+          </p>
+          <ul class="contact-list">
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
+              <span><a href="{{ $.phoneHref }}">{{ contact.phone }}</a><br>Dispatch</span>
+            </li>
+            <li>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg>
+              <span><a href="mailto:{{ contact.email }}">{{ contact.email }}</a><br>Rates and paperwork</span>
+            </li>
+          </ul>
+          <dl class="hours">{{{ html.hoursList }}}</dl>
+          <p style="margin-top: 1rem; font-size: 0.875rem; color: #8494ad">{{ contact.hoursNote }}</p>
+        </div>
+
+        <div class="aside-card aside-card--light">
+          <h3>What happens next</h3>
+          <ol class="prose" style="padding-left: 1.35rem; list-style: decimal; margin-top: 0.75rem">
+            <li>We read the request and check equipment against your dates.</li>
+            <li>You get an all-in rate with accessorials named, same business day.</li>
+            <li>Approve it and we send a rate confirmation plus our certificate of insurance.</li>
+            <li>Dispatch calls you with the driver and truck details before pickup.</li>
+          </ol>
+        </div>
+
+        <div class="aside-card aside-card--light">
+          <h3>First time working with us?</h3>
+          <p>
+            Verify our authority first. USDOT {{ authority.usdot }}, MC
+            {{ authority.mc }}.
+          </p>
+          <p style="margin-top: 0.75rem">
+            <a href="{{ authority.saferUrl }}" target="_blank" rel="noopener">Check our FMCSA record &nearr;</a>
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
